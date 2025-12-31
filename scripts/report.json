@@ -1,0 +1,18 @@
+[
+  {
+    "extension": "ghbmnnjooekpmoecnnnilnnbdlolhkhi",
+    "score": 0,
+    "recommendation": "Review manually",
+    "findings": [
+      "manifest.json missing"
+    ]
+  },
+  {
+    "extension": "nmmhkkegccagdldgiimedpiccmgmieda",
+    "score": 0,
+    "recommendation": "Review manually",
+    "findings": [
+      "manifest.json missing"
+    ]
+  }
+]

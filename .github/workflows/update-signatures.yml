@@ -1,0 +1,22 @@
+name: Update Threat Signatures
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch latest threats
+        run: python scripts/update_signatures.py
+        env:
+          VIRUSTOTAL_API_KEY: ${{ secrets.VT_API_KEY }}
+      - name: Create PR if changes
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: "🔒 Auto-update threat signatures"
+          body: "New malicious patterns detected"
+

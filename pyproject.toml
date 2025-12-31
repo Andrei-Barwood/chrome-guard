@@ -1,0 +1,82 @@
+[build-system]
+requires = ["hatchling>=1.24.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = ["src/chromeguard", "data/**/*", "README.md", "LICENSE", "requirements.txt"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/chromeguard"]
+force-include = { "data" = "chromeguard/data" }
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "data", "README.md", "LICENSE", "requirements.txt"]
+
+[project]
+name = "chromeguard"
+version = "0.1.0"
+description = "Chrome/Edge extension audit tool to detect malicious behavior and risky permissions."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "ChromeGuard Contributors" }]
+keywords = ["security", "chrome", "edge", "extensions", "malware", "audit"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Operating System :: OS Independent",
+  "Environment :: Console"
+]
+dependencies = [
+  "typer>=0.12,<0.21",
+  "rich>=13.7.1",
+  "structlog>=24.1.0",
+  "pydantic>=2.9.0",
+  "jsonschema>=4.23.0",
+  "pyyaml>=6.0.2",
+  "requests>=2.32.3",
+  "aiohttp>=3.10.2",
+  "playwright>=1.46.0",
+  "importlib-resources>=6.4.5"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.2",
+  "pytest-asyncio>=0.24.0",
+  "pytest-cov>=5.0.0",
+  "mypy>=1.11.1",
+  "ruff>=0.6.3",
+  "black>=24.8.0",
+  "types-requests",
+  "types-PyYAML"
+]
+
+[project.scripts]
+chromeguard = "chromeguard.cli:app"
+
+[tool.black]
+line-length = 100
+target-version = ["py311", "py312", "py313"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "B", "I", "UP"]
+
+[tool.pytest.ini_options]
+addopts = "-q --disable-warnings --maxfail=1"
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+warn_return_any = true
+warn_unused_ignores = true
+strict_optional = true
+
+

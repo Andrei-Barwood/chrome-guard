@@ -1,0 +1,11 @@
+high_risk:
+  - "<all_urls>"
+  - webRequest
+  - webRequestBlocking
+  - cookies
+  - storage
+  - tabs
+  - history
+  - management
+  - nativeMessaging
+
