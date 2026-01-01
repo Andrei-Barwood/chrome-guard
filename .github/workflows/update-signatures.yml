@@ -8,8 +8,13 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -24,6 +29,10 @@ jobs:
       - name: Create PR if changes
         uses: peter-evans/create-pull-request@v5
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update threat signatures"
           title: "🔒 Auto-update threat signatures"
           body: "New malicious patterns detected"
+          branch: "auto-update-signatures"
+          delete-branch: true
 
