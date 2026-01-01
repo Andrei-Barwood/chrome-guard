@@ -1,6 +1,7 @@
 """Fetch latest threat signatures (placeholder)."""
 
 import json
+import sys
 from pathlib import Path
 
 import requests
@@ -20,13 +21,20 @@ def fetch_latest() -> dict:
 
 def save(data: dict) -> None:
     path = Path(data_path()) / "signatures.json"
+    # Ensure directory exists
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as handle:
         json.dump(data, handle, indent=2)
 
 
 def main() -> None:
-    new_data = fetch_latest()
-    save(new_data)
+    try:
+        new_data = fetch_latest()
+        save(new_data)
+        print(f"Successfully updated signatures at {data_path()}/signatures.json")
+    except Exception as e:
+        print(f"Error updating signatures: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

@@ -22,11 +22,26 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -e .
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - name: Fetch latest threats
         run: python scripts/update_signatures.py
         env:
           VIRUSTOTAL_API_KEY: ${{ secrets.VT_API_KEY }}
+      - name: Check for changes
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            git status
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          fi
       - name: Create PR if changes
+        if: steps.changes.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -35,4 +50,7 @@ jobs:
           body: "New malicious patterns detected"
           branch: "auto-update-signatures"
           delete-branch: true
+          labels: |
+            automated
+            security
 
