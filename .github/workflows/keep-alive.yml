@@ -1,0 +1,15 @@
+name: Keep Alive
+on:
+  schedule:
+    - cron: '0 0 1 * *' # Se ejecuta el día 1 de cada mes
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dummy commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit --allow-empty -m "Keep-alive: manteniendo el repositorio activo"
+          git push
