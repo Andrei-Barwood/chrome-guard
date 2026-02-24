@@ -4,7 +4,7 @@
 [![PyPI](https://img.shields.io/pypi/v/chromeguard.svg)](#)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#license)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](#)
-
+ 
 Herramienta open-source de línea de comandos para auditar, monitorear y detectar extensiones maliciosas de Chrome/Edge/Brave. Diseñada tras incidentes recientes (OX Security, Koi Security) donde extensiones “Featured” exfiltraron chats de IA.
 
 > Disclaimer: For educational and defensive purposes only. Úsalo bajo tu propia responsabilidad y siempre con consentimiento del usuario/organización.
