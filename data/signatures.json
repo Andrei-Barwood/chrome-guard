@@ -1,30 +1,3 @@
 {
-  "signatures": [
-    {
-      "name": "Chat exfil domain",
-      "pattern": "chatsai.*\\.com|deepai.*\\.net|deepaichats\\.com",
-      "severity": "high"
-    },
-    {
-      "name": "Base64 payload exfil",
-      "pattern": "eval\\(atob\\(|btoa\\(",
-      "severity": "high"
-    },
-    {
-      "name": "Dynamic Function constructor",
-      "pattern": "Function\\(['\\\"]return this['\\\"]\\)\\(\\)",
-      "severity": "medium"
-    },
-    {
-      "name": "Analytics abuse",
-      "pattern": "analytics.*collect|beacon|sendBeacon",
-      "severity": "medium"
-    },
-    {
-      "name": "Silent update hook",
-      "pattern": "chrome\\.runtime\\.requestUpdateCheck",
-      "severity": "medium"
-    }
-  ]
+  "signatures": []
 }
-
